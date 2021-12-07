@@ -18,3 +18,10 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.user-image {
+  border-radius: 50%;
+  --tw-border-opacity: 1;
+  border-color: rgba(229, 231, 235, var(--tw-border-opacity));
+  padding: 1px;
+}

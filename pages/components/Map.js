@@ -10,8 +10,8 @@ const Map = ({ pickupCoordinates, dropoffCoordinates }) => {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [30.664, 6.89],
-      zoom: 3,
+      center: [127.024612, 37.5326],
+      zoom: 8,
     });
 
     if (pickupCoordinates) {

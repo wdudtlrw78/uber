@@ -1,10 +1,32 @@
 import tw from 'tailwind-styled-components';
 import Map from './components/Map';
-import UserImage from 'next/image';
+
 import profile from '../public/profile.jpg';
 import Link from 'next/link';
 
+import { auth } from '../firebase';
+import { onAuthStateChanged, signOut } from '@firebase/auth';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+
 export default function Home() {
+  const [User, setUser] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    return onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser({
+          name: user.displayName,
+          photoUrl: user.photoURL,
+        });
+      } else {
+        setUser(null);
+        router.push('/login');
+      }
+    });
+  }, []);
+
   return (
     <Wrapper>
       <Map />
@@ -14,13 +36,12 @@ export default function Home() {
         <Header>
           <UberLogo src="https://i.ibb.co/84stgjq/uber-technologies-new-20218114.jpg" />
           <Profile>
-            <Name>Yeong-Sik, Mo</Name>
+            <Name>{User?.name}</Name>
             <UserImage
-              src={profile}
+              src={User?.photoUrl}
               className="user-image"
               alt="Picture of the author"
-              width={48}
-              height={48}
+              onClick={() => signOut(auth)}
             />
           </Profile>
         </Header>
@@ -70,7 +91,7 @@ const Profile = tw.div`
 `;
 
 const Name = tw.div`
-  mn-4 w-20 text-sm
+  mn-4 w-20 text-sm text-center
 `;
 
 const ActionButtons = tw.div`
@@ -87,4 +108,8 @@ const ActionButtonImage = tw.img`
 
 const InputButton = tw.div`
   h-20 bg-gray-200 text-2xl p-4 flex items-center rounded-lg mt-8
+`;
+
+const UserImage = tw.img`
+  h-12 w-12 cursor-pointer
 `;

@@ -64,11 +64,11 @@ const Confirm = () => {
         </ConfirmButtonContainer>
       </RideContainer>
 
-      <Link href="/">
-        <BackButtun>
+      <BackButtun>
+        <Link href="/">
           <LeftArrow src="https://img.icons8.com/ios-filled/50/000000/left.png" />
-        </BackButtun>
-      </Link>
+        </Link>
+      </BackButtun>
     </Wrapper>
   );
 };

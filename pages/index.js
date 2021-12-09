@@ -1,7 +1,5 @@
 import tw from 'tailwind-styled-components';
 import Map from './components/Map';
-
-import profile from '../public/profile.jpg';
 import Link from 'next/link';
 
 import { auth } from '../firebase';
